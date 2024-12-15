@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Header Navbar (bootstrap5)
  *
@@ -6,23 +7,23 @@
  */
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-$container = get_theme_mod( 'understrap_container_type' );
+$container = get_theme_mod('understrap_container_type');
 $container = "container-fluid";
 ?>
 
 <nav id="main-nav" class="navbar navbar-expand-lg" aria-labelledby="main-nav-label">
-	
-	<div class="<?php echo esc_attr( $container ); ?>">
-		
-		<!-- Burger Menu Button -->
-		<button class="navbar-toggler-custom" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'understrap' ); ?>">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/menu-toggler.svg" alt="Menu" class="navbar-toggler-icon">
-		</button>
 
+	<div class="<?php echo esc_attr($container); ?>">
 		<!-- Left Menu -->
 		<div class="navbar-left">
+			<!-- Burger Menu Button -->
+			<button class="navbar-toggler-custom me-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'understrap'); ?>">
+				<span class="navbar-toggler-icon">
+					<?php include get_stylesheet_directory() . '/img/menu-toggler.svg'; ?>
+				</span>
+			</button>
 			<?php
 			wp_nav_menu(
 				array(
@@ -40,9 +41,9 @@ $container = "container-fluid";
 
 		<!-- Logo -->
 		<div class="navbar-brand-wrapper">
-			<?php if ( ! has_custom_logo() ) { ?>
-				<a class="navbar-brand" rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" itemprop="url">
-					<?php bloginfo( 'name' ); ?>
+			<?php if (! has_custom_logo()) { ?>
+				<a class="navbar-brand" rel="home" href="<?php echo esc_url(home_url('/')); ?>" itemprop="url">
+					<?php bloginfo('name'); ?>
 				</a>
 			<?php } else {
 				the_custom_logo();
@@ -64,7 +65,7 @@ $container = "container-fluid";
 				)
 			);
 			?>
-			
+
 			<!-- Search Icon and Form -->
 			<div class="search-wrapper">
 				<button class="search-toggle" aria-label="Toggle search">
@@ -88,12 +89,12 @@ $container = "container-fluid";
 		<div class="offcanvas-header">
 			<button type="button" class="btn-close" aria-label="Close"></button>
 		</div>
-		
+
 		<div class="offcanvas-body">
 			<div class="offcanvas-logo">
 				<?php the_custom_logo(); ?>
 			</div>
-			
+
 			<div class="offcanvas-nav">
 				<?php
 				wp_nav_menu(
@@ -109,7 +110,7 @@ $container = "container-fluid";
 				);
 				?>
 			</div>
-			
+
 			<div class="offcanvas-social">
 				<a href="#" class="social-icon" target="_blank" rel="noopener noreferrer">
 					<i class="fab fa-linkedin-in"></i>

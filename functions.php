@@ -8,6 +8,9 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+// Add this line to include the helper file
+require_once get_stylesheet_directory() . '/inc/helpers/articles-display-helper.php';
+
 
 
 /**
