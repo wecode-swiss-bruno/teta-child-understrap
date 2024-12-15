@@ -1,6 +1,6 @@
 /*!
   * Understrap v1.2.0 (https://understrap.com)
-  * Copyright 2013-2022 The Understrap Authors (https://github.com/understrap/understrap/graphs/contributors)
+  * Copyright 2013-2024 The Understrap Authors (https://github.com/understrap/understrap/graphs/contributors)
   * Licensed under GPL-3.0 (undefined)
   */
 (function (global, factory) {
@@ -224,7 +224,6 @@
 			  const reflow = element => {
 			    element.offsetHeight; // eslint-disable-line no-unused-expressions
 			  };
-
 			  const getjQuery = () => {
 			    if (window.jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
 			      return window.jQuery;
@@ -3636,44 +3635,44 @@
 
 	var lib = /*#__PURE__*/Object.freeze({
 		__proto__: null,
-		popperGenerator: popperGenerator,
-		detectOverflow: detectOverflow,
-		createPopperBase: createPopper$2,
-		createPopper: createPopper,
-		createPopperLite: createPopper$1,
-		top: top,
-		bottom: bottom,
-		right: right,
-		left: left,
-		auto: auto,
-		basePlacements: basePlacements,
-		start: start,
-		end: end,
-		clippingParents: clippingParents,
-		viewport: viewport,
-		popper: popper,
-		reference: reference,
-		variationPlacements: variationPlacements,
-		placements: placements,
-		beforeRead: beforeRead,
-		read: read,
-		afterRead: afterRead,
-		beforeMain: beforeMain,
-		main: main,
 		afterMain: afterMain,
-		beforeWrite: beforeWrite,
-		write: write,
+		afterRead: afterRead,
 		afterWrite: afterWrite,
-		modifierPhases: modifierPhases,
 		applyStyles: applyStyles$1,
 		arrow: arrow$1,
+		auto: auto,
+		basePlacements: basePlacements,
+		beforeMain: beforeMain,
+		beforeRead: beforeRead,
+		beforeWrite: beforeWrite,
+		bottom: bottom,
+		clippingParents: clippingParents,
 		computeStyles: computeStyles$1,
+		createPopper: createPopper,
+		createPopperBase: createPopper$2,
+		createPopperLite: createPopper$1,
+		detectOverflow: detectOverflow,
+		end: end,
 		eventListeners: eventListeners,
 		flip: flip$1,
 		hide: hide$1,
+		left: left,
+		main: main,
+		modifierPhases: modifierPhases,
 		offset: offset$1,
+		placements: placements,
+		popper: popper,
+		popperGenerator: popperGenerator,
 		popperOffsets: popperOffsets$1,
-		preventOverflow: preventOverflow$1
+		preventOverflow: preventOverflow$1,
+		read: read,
+		reference: reference,
+		right: right,
+		start: start,
+		top: top,
+		variationPlacements: variationPlacements,
+		viewport: viewport,
+		write: write
 	});
 
 	var require$$0 = /*@__PURE__*/getAugmentedNamespace(lib);
@@ -4247,7 +4246,6 @@
 			    // if false, we use the backdrop helper without adding any element to the dom
 			    rootElement: 'body' // give the choice to place backdrop under different elements
 			  };
-
 			  const DefaultType = {
 			    className: 'string',
 			    clickCallback: '(function|null)',
@@ -4396,7 +4394,6 @@
 			    autofocus: true,
 			    trapElement: null // The element to trap focus inside of
 			  };
-
 			  const DefaultType = {
 			    autofocus: 'boolean',
 			    trapElement: 'element'
@@ -6742,6 +6739,125 @@
 	    }, false);
 	  }
 	})();
+
+	// Add your custom JS here.
+
+	// Search functionality
+	document.addEventListener('DOMContentLoaded', function () {
+	  const searchToggle = document.querySelector('.search-toggle');
+	  const searchForm = document.querySelector('.search-form-wrapper');
+	  const searchClose = document.querySelector('.search-close');
+	  const searchInput = document.querySelector('.search-field');
+	  const navbar = document.getElementById('main-nav');
+	  let lastScroll = 0;
+	  const scrollThreshold = 10; // Minimum scroll amount to trigger hide/show
+
+	  // Search functionality
+	  if (searchToggle && searchForm && searchClose) {
+	    searchToggle.addEventListener('click', function () {
+	      searchForm.classList.add('active');
+	      searchInput.focus();
+	    });
+	    searchClose.addEventListener('click', function () {
+	      searchForm.classList.remove('active');
+	    });
+	  }
+
+	  // Navbar scroll functionality
+	  function handleScroll() {
+	    const currentScroll = window.pageYOffset;
+
+	    // Show navbar at the very top
+	    if (currentScroll <= 0) {
+	      navbar.classList.remove('scrolled-down');
+	      navbar.classList.remove('scrolled-up');
+	      return;
+	    }
+
+	    // Determine scroll direction and distance
+	    if (Math.abs(currentScroll - lastScroll) < scrollThreshold) {
+	      return; // Don't do anything if the scroll amount is too small
+	    }
+
+	    // Scrolling down
+	    if (currentScroll > lastScroll && currentScroll > 80) {
+	      if (!navbar.classList.contains('scrolled-down')) {
+	        navbar.classList.remove('scrolled-up');
+	        navbar.classList.add('scrolled-down');
+	      }
+	    }
+	    // Scrolling up
+	    else if (currentScroll < lastScroll) {
+	      if (navbar.classList.contains('scrolled-down')) {
+	        navbar.classList.remove('scrolled-down');
+	        navbar.classList.add('scrolled-up');
+	      }
+	    }
+	    lastScroll = currentScroll;
+	  }
+
+	  // Add scroll event listener with throttling
+	  let ticking = false;
+	  window.addEventListener('scroll', function () {
+	    if (!ticking) {
+	      window.requestAnimationFrame(function () {
+	        handleScroll();
+	        ticking = false;
+	      });
+	      ticking = true;
+	    }
+	  }, {
+	    passive: true
+	  });
+
+	  // Offcanvas functionality
+	  const offcanvasToggle = document.querySelector('[data-bs-toggle="offcanvas"]');
+	  const offcanvas = document.getElementById('navbarOffcanvas');
+	  const closeBtn = offcanvas?.querySelector('.btn-close');
+	  const body = document.body;
+	  if (offcanvasToggle && offcanvas) {
+	    // Initialize Bootstrap's Offcanvas
+	    const bsOffcanvas = new bootstrap.Offcanvas(offcanvas, {
+	      backdrop: false,
+	      // Disable default backdrop
+	      keyboard: true
+	    });
+
+	    // Show event
+	    offcanvas.addEventListener('show.bs.offcanvas', function () {
+	      body.classList.add('offcanvas-active');
+	    });
+
+	    // Hide event
+	    offcanvas.addEventListener('hide.bs.offcanvas', function () {
+	      body.classList.remove('offcanvas-active');
+	    });
+
+	    // Close button handler
+	    if (closeBtn) {
+	      closeBtn.addEventListener('click', function (e) {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        bsOffcanvas.hide();
+	      });
+	    }
+
+	    // Close offcanvas when clicking on links
+	    const offcanvasLinks = offcanvas.querySelectorAll('.nav-link');
+	    offcanvasLinks.forEach(link => {
+	      link.addEventListener('click', function (e) {
+	        e.preventDefault();
+	        bsOffcanvas.hide();
+	        const href = this.getAttribute('href');
+	        if (href) {
+	          setTimeout(() => {
+	            window.location.href = href;
+	          }, 300);
+	        }
+	      });
+	    });
+	  }
+	});
 
 	exports.Alert = alert;
 	exports.Button = button;

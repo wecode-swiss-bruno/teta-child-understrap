@@ -92,3 +92,81 @@ function understrap_child_customize_controls_js() {
 	);
 }
 add_action( 'customize_controls_enqueue_scripts', 'understrap_child_customize_controls_js' );
+
+
+
+/**
+ * Check if ACF is active
+ */
+function check_acf_activation() {
+    if ( ! class_exists('ACF') ) {
+        add_action( 'admin_notices', function() {
+            ?>
+            <div class="notice notice-error">
+                <p><?php _e( 'This theme requires Advanced Custom Fields PRO to be installed and activated.', 'understrap-child' ); ?></p>
+            </div>
+            <?php
+        });
+    }
+}
+add_action( 'admin_init', 'check_acf_activation' );
+
+function translate_date_to_french($date) {
+    $months_en = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+    $months_fr = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+    return str_replace($months_en, $months_fr, $date);
+}
+
+add_filter('get_the_date', 'translate_date_to_french');
+
+remove_filter('get_the_excerpt', 'wp_trim_excerpt');
+
+/**
+ * Add Typekit fonts
+ */
+function add_typekit_fonts() {
+    ?>
+    <link rel="stylesheet" href="https://use.typekit.net/upr7qks.css">
+    <?php
+}
+add_action('wp_head', 'add_typekit_fonts');
+
+/**
+ * Register custom menu locations
+ */
+function register_custom_menus() {
+    register_nav_menus(
+        array(
+            'left_menu' => __('Left Menu', 'understrap-child'),
+            'right_menu' => __('Right Menu', 'understrap-child')
+        )
+    );
+}
+add_action('after_setup_theme', 'register_custom_menus');
+
+function understrap_child_enqueue_scripts() {
+    // Enqueue Bootstrap JS from CDN as fallback
+    wp_enqueue_script(
+        'bootstrap',
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js',
+        array('jquery'),
+        '5.3.2',
+        true
+    );
+    
+    // Enqueue your custom JavaScript
+    wp_enqueue_script('custom-js', get_stylesheet_directory_uri() . '/src/js/custom-javascript.js', array('jquery', 'bootstrap'), null, true);
+}
+add_action('wp_enqueue_scripts', 'understrap_child_enqueue_scripts');
+
+// Add custom favicon
+function add_custom_favicon() {
+    echo '<link rel="icon" type="image/x-icon" href="' . get_stylesheet_directory_uri() . '/favicon.ico">';
+}
+add_action('wp_head', 'add_custom_favicon');
+
+function add_font_awesome() {
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+}
+add_action('wp_enqueue_scripts', 'add_font_awesome');
+

@@ -14,7 +14,9 @@
     "js-minify": "terser js/child-theme.min.js --config-file src/build/terser.config.json --source-map \"content=js/child-theme.js.map,url=child-theme.min.js.map,filename=child-theme.min.js\" --output js/child-theme.min.js",
     "watch": "npm-run-all --parallel watch-run-*",
     "watch-bs": "npm-run-all --parallel bs watch-run-*",
+    "watch-bs-dev": "cross-env SCRIPT_DEBUG=true npm-run-all --parallel bs watch-run-css-dev watch-run-js",
     "watch-run-css": "nodemon --watch src/sass/ --ext scss --exec \"npm-run-all css\"",
+    "watch-run-css-dev": "nodemon --watch src/sass/ --ext scss --exec \"sass --style expanded --no-source-map --quiet src/sass/child-theme.scss:css/child-theme.css src/sass/child-theme.scss:css/child-theme.min.css\" --quiet",
     "watch-run-js": "nodemon --watch src/js/ --ext js --exec \"npm-run-all js\"",
     "copy-assets": "node src/build/copy-assets.js",
     "dist": "npm-run-all --parallel css js",
@@ -41,7 +43,6 @@
     "url": "https://github.com/understrap/understrap-child/issues"
   },
   "homepage": "https://understrap.com",
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.19.6",
     "@babel/preset-env": "^7.19.4",
@@ -57,6 +58,7 @@
     "browserslist": "^4.21.4",
     "caniuse-lite": "^1.0.30001430",
     "clean-css-cli": "^5.6.1",
+    "cross-env": "^7.0.3",
     "font-awesome": "^4.7.0",
     "nodemon": "^2.0.20",
     "npm-run-all": "^4.1.5",
