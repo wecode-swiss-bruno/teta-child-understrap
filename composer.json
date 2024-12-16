@@ -1,5 +1,5 @@
 {
-	"name": "understrap/understrap-child",
+	"name": "understrap/tetaz-dev",
 	"description": "Basic Child Starter Theme for Understrap",
 	"type": "wordpress-theme",
 	"license": "GPL-3.0",
@@ -9,11 +9,11 @@
 		"theme",
 		"bootstrap"
 	],
-	"homepage": "https://github.com/understrap/understrap-child",
+	"homepage": "https://github.com/understrap/tetaz-dev",
 	"authors": [
 		{
 			"name": "Contributors",
-			"homepage": "https://github.com/understrap/understrap-child/contributors.md"
+			"homepage": "https://github.com/understrap/tetaz-dev/contributors.md"
 		}
 	],
 	"require": {

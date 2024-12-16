@@ -35,7 +35,7 @@ if ($posts && count($posts) >= 4) : ?>
                         <div class="col-12">
                             <article class="grid-article grid-article-large" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
                                 <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
-                                <div class="content-wrapper">
+                                <div class="content-wrapper p-3 p-md-4 p-lg-5">
                                     <a href="<?php echo get_permalink($post); ?>" class="post-link">
                                         <h2><?php echo esc_html(get_the_title($post)); ?></h2>
                                         <div class="excerpt">
@@ -56,8 +56,8 @@ if ($posts && count($posts) >= 4) : ?>
                             <div class="col-md-6">
                                 <article class="grid-article grid-article-medium" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
                                     <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
-                                    <div class="content-wrapper">
-                                        <a href="<?php echo get_permalink($post); ?>" class="post-link">
+                                    <div class="content-wrapper p-3 p-md-4 p-lg-5">
+                                    <a href="<?php echo get_permalink($post); ?>" class="post-link">
                                             <h2><?php echo esc_html(get_the_title($post)); ?></h2>
                                             <div class="excerpt">
                                                 <?php echo wp_kses_post(get_the_excerpt($post)); ?>
@@ -80,8 +80,8 @@ if ($posts && count($posts) >= 4) : ?>
                     ?>
                     <article class="grid-article grid-article-full" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
                         <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
-                        <div class="content-wrapper">
-                            <a href="<?php echo get_permalink($post); ?>" class="post-link">
+                        <div class="content-wrapper p-3 p-md-4 p-lg-5">
+                        <a href="<?php echo get_permalink($post); ?>" class="post-link">
                                 <h2><?php echo esc_html(get_the_title($post)); ?></h2>
                                 <div class="excerpt">
                                     <?php echo wp_kses_post(get_the_excerpt($post)); ?>

@@ -11,6 +11,13 @@ defined( 'ABSPATH' ) || exit;
 // Add this line to include the helper file
 require_once get_stylesheet_directory() . '/inc/helpers/articles-display-helper.php';
 
+// Add these lines to include the new files
+require_once get_stylesheet_directory() . '/inc/helpers/sponsor-banner-helper.php';
+require_once get_stylesheet_directory() . '/inc/acf-templates/sponsor-banner.php';
+
+// Add this line with your other requires
+require_once get_stylesheet_directory() . '/inc/admin/theme-docs.php';
+
 
 
 /**
@@ -61,7 +68,7 @@ add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
  * Load the child theme's text domain
  */
 function add_child_theme_textdomain() {
-	load_child_theme_textdomain( 'understrap-child', get_stylesheet_directory() . '/languages' );
+	load_child_theme_textdomain( 'tetaz-dev', get_stylesheet_directory() . '/languages' );
 }
 add_action( 'after_setup_theme', 'add_child_theme_textdomain' );
 
@@ -106,7 +113,7 @@ function check_acf_activation() {
         add_action( 'admin_notices', function() {
             ?>
             <div class="notice notice-error">
-                <p><?php _e( 'This theme requires Advanced Custom Fields PRO to be installed and activated.', 'understrap-child' ); ?></p>
+                <p><?php _e( 'This theme requires Advanced Custom Fields PRO to be installed and activated.', 'tetaz-dev' ); ?></p>
             </div>
             <?php
         });
@@ -140,8 +147,9 @@ add_action('wp_head', 'add_typekit_fonts');
 function register_custom_menus() {
     register_nav_menus(
         array(
-            'left_menu' => __('Left Menu', 'understrap-child'),
-            'right_menu' => __('Right Menu', 'understrap-child')
+            'left_menu' => __('Left Menu', 'tetaz-dev'),
+            'right_menu' => __('Right Menu', 'tetaz-dev'),
+            'footer_menu' => __('Footer Menu', 'tetaz-dev'),
         )
     );
 }
@@ -172,4 +180,17 @@ function add_font_awesome() {
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 }
 add_action('wp_enqueue_scripts', 'add_font_awesome');
+
+// Remove category base from URLs
+function remove_category_url_base() {
+    global $wp_rewrite;
+    $wp_rewrite->category_base = '.';
+    $wp_rewrite->flush_rules();
+}
+add_action('init', 'remove_category_url_base');
+
+function tetaz_dev_load_theme_textdomain() {
+    load_theme_textdomain('tetaz-dev', get_template_directory() . '/languages');
+}
+add_action('after_setup_theme', 'tetaz_dev_load_theme_textdomain');
 

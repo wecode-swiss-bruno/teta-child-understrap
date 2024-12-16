@@ -28,7 +28,7 @@ if ($posts) : ?>
         ?>
             <section class="article-full-screen" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
                 <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
-                <div class="container-fluid">
+                <div class="container mx-auto px-3 px-md-0">
                     <div class="row">
                         <div class="col-12">
                             <div class="content-wrapper">

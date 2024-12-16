@@ -1,3 +1,15 @@
+// GENERAL LAYOUT
+html,
+body {
+  background-color: #000 !important;
+}
+
+.site {
+  max-width: 2000px !important;
+  margin: 0 auto !important;
+  background-color: #fff !important;
+}
+
 // Define font weight variables at the top of your file
 $font-weight-regular: 400;
 $font-weight-medium: 500;
@@ -10,6 +22,29 @@ $font-weight-bold: 700;
   }
 }
 
+body {
+  font-family: $font-family-pt;
+  font-weight: $font-weight-regular;
+  padding-top: 0px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  @extend .bilo !optional;
+  font-family: $font-family-bilo;
+  font-weight: $font-weight-bold;
+}
+
 #page-wrapper,
 #content,
 .wrapper,
@@ -17,12 +52,6 @@ $font-weight-bold: 700;
 .container {
   padding: 0;
   margin: 0;
-}
-
-body {
-  font-family: $font-family-pt;
-  font-weight: $font-weight-regular;
-  padding-top: 0px;
 }
 
 .navbar,
@@ -36,6 +65,21 @@ textarea {
   @extend .bilo !optional;
 }
 
+.category-badge {
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.1rem;
+  border-bottom: 2px solid white;
+  font-size: 1rem;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.category-badge:hover {
+  opacity: 0.7;
+}
+
 .fullscreen-posts-wrapper {
   .article-full-screen {
     height: 100vh;
@@ -47,7 +91,7 @@ textarea {
     display: flex;
     align-items: end;
     color: #fff;
-   //  scroll-snap-align: start; // For smooth scrolling
+    //  scroll-snap-align: start; // For smooth scrolling
 
     .overlay {
       position: absolute;
@@ -59,15 +103,9 @@ textarea {
       transition: opacity 0.3s ease;
     }
 
-    .container-fluid {
+    .container {
       position: relative;
       z-index: 2;
-    }
-
-    .content-wrapper {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 4rem;
     }
 
     .content-wrapper-aligner {
@@ -91,23 +129,13 @@ textarea {
     }
 
     h2 {
-      @extend .pt-serif-bold !optional;
       margin-bottom: 1rem;
       font-size: 3rem;
     }
 
     .categories {
       margin-bottom: 1.5rem;
-
-      .category-badge {
-        display: inline-block;
-        padding: 0.25rem 1rem;
-        margin-right: 0.5rem;
-        margin-bottom: 0.5rem;
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        font-size: 0.875rem;
-      }
+      display: block;
     }
 
     .excerpt {
@@ -120,13 +148,16 @@ textarea {
     .post-meta {
       @extend .bilo !optional;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
       margin-bottom: 1.5rem;
+      gap: 0.5rem;
 
       .post-date {
         font-size: 1rem;
         opacity: 0.8;
         margin-right: 2rem;
+        font-style: italic;
       }
 
       .categories {
@@ -143,9 +174,9 @@ html {
 
 // Optional: Add snap scrolling
 .fullscreen-posts-wrapper {
-//   height: 100vh;
-//   overflow-y: auto;
-//   scroll-snap-type: y mandatory;
+  //   height: 100vh;
+  //   overflow-y: auto;
+  //   scroll-snap-type: y mandatory;
 }
 
 // Navbar styles
@@ -154,21 +185,37 @@ html {
   background: #fff;
   position: fixed !important;
   top: 0;
-  left: 0;
+  left: 0 !important;
   right: 0;
-  width: 100%;
+  width: 100% !important;
+  max-width: 2000px !important;
+  margin: 0 auto !important;
   z-index: 1040;
-  transform: translateY(0);
+  transform: translateY(0) !important;
   transition: transform 0.3s ease-in-out;
   will-change: transform;
+  padding: 0 !important;
+
+  @media (min-width: 992px) {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
 
   &.scrolled-down {
     transform: translateY(-100%) !important;
+    
+    @media (min-width: 992px) {
+      transform: translate(-50%, -100%) !important;
+    }
   }
 
   &.scrolled-up {
     transform: translateY(0) !important;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    
+    @media (min-width: 992px) {
+      transform: translate(-50%, 0) !important;
+    }
   }
 
   .nav-link {
@@ -181,16 +228,31 @@ html {
     text-transform: uppercase;
   }
 
-  .container-fluid {
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
+  .container {
+    width: 100% !important;
+    padding: 0 1rem !important;
+    margin: 0 !important;
+    max-width: 100% !important;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding: 0 2rem;
     gap: 2rem;
+  }
+
+  // Add mobile-specific adjustments
+  @media (max-width: 991px) {
+    .navbar-brand-wrapper {
+      .navbar-brand {
+        img {
+          height: 30px; // Smaller logo on mobile
+        }
+      }
+    }
+    
+    .container {
+      padding: 0 1rem !important;
+    }
   }
 
   // Burger Menu
@@ -249,8 +311,6 @@ html {
 
   // Search
   .search-wrapper {
-    position: relative;
-
     .search-toggle {
       background: none;
       border: none;
@@ -263,7 +323,7 @@ html {
       position: absolute;
       top: 0;
       right: 0;
-      width: 100vw;
+      width: 100%;
       height: 80px;
       background: #fff;
       display: none;
@@ -290,8 +350,37 @@ html {
           padding: 0;
           font-size: 1.25rem;
 
+          // Remove default focus styles
           &:focus {
             outline: none;
+            box-shadow: none;
+            -webkit-box-shadow: none;
+          }
+
+          // Remove WebKit's default styles
+          &:focus-visible {
+            outline: none;
+          }
+
+          // Remove Firefox's default styles
+          &::-moz-focus-inner {
+            border: 0;
+          }
+
+          // Override Bootstrap's form control focus styles
+          &,
+          &.form-control:focus {
+            outline: none !important;
+            box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+          }
+
+          // Remove the search cancel button (x)
+          &::-webkit-search-cancel-button,
+          &::-webkit-search-decoration {
+            -webkit-appearance: none;
+            appearance: none;
+            display: none;
           }
         }
 
@@ -314,8 +403,10 @@ html {
 // Offcanvas styles
 .offcanvas {
   background: rgba(0, 0, 0, 0.9) !important;
-  width: 100vw !important;
+  width: 100% !important;
   height: 100vh !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
 
   .offcanvas-header {
     position: absolute;
@@ -343,7 +434,7 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 0;
+    padding: 3rem 1rem !important;
     height: 100vh;
     color: #fff;
 
@@ -377,6 +468,13 @@ html {
           display: flex;
           align-items: center;
           justify-content: center;
+          text-transform: uppercase;
+
+          @media (max-width: 768px) {
+            .nav-link {
+              font-size: 1rem !important;
+            }
+          }
 
           .nav-link {
             @extend .bilo;
@@ -384,6 +482,7 @@ html {
             font-size: 2rem;
             padding: 1rem;
             transition: all 0.3s ease;
+            text-transform: uppercase !important;
 
             &:hover {
               opacity: 0.7;
@@ -453,11 +552,24 @@ html {
 
 // Prevent body scroll when offcanvas is open
 body.offcanvas-active {
-  overflow: hidden;
+  // overflow: hidden;
 
   .navbar-toggler-custom {
     position: relative;
     z-index: 1046; // Higher than offcanvas
+  }
+}
+
+.navbar-brand {
+  img {
+    transition: filter 0.3s ease;
+  }
+
+  &:hover {
+    img {
+      filter: blur(4px);
+      transition: filter 3s ease;
+    }
   }
 }
 
@@ -538,7 +650,7 @@ body.offcanvas-active {
   &.navbar-expand-lg {
     // Override core Bootstrap behaviors
     flex-wrap: wrap !important;
-    padding: 0 !important;
+    // padding: 0 !important;
 
     // Force show toggler at all breakpoints
     .navbar-toggler,
@@ -559,7 +671,6 @@ body.offcanvas-active {
     > .container-fluid {
       flex-wrap: inherit;
       justify-content: center;
-      padding: 0 2rem;
     }
 
     // Override default nav styles
@@ -590,6 +701,10 @@ body.offcanvas-active {
   }
 }
 
+.search-form-wrapper {
+  position: fixed !important;
+}
+
 // Force override Bootstrap's offcanvas defaults
 .offcanvas,
 .offcanvas.offcanvas-start,
@@ -600,10 +715,10 @@ body .offcanvas {
   visibility: visible !important;
   position: fixed !important;
   display: block !important;
-  width: 100vw !important;
+  width: 100% !important;
   height: 100vh !important;
-  max-width: 100vw !important;
-  max-height: 100vh !important;
+  max-width: 100% !important;
+  max-height: 2000px !important;
   transform: translateX(-100%) !important;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   top: 0 !important;
@@ -656,10 +771,9 @@ body .offcanvas {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: space-between !important;
-    padding: 0 4rem !important;
+    padding: 3rem 4rem !important;
 
     .offcanvas-logo {
-      padding-top: 4rem !important;
       margin-bottom: 2rem !important;
 
       img {
@@ -675,10 +789,11 @@ body .offcanvas {
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-
+      padding-bottom: 4rem !important;
       .navbar-nav {
         width: 100% !important;
         padding: 0 !important;
+        padding-bottom: 4rem !important;
         margin: 0 !important;
         flex-direction: column;
         align-items: left !important;
@@ -691,15 +806,22 @@ body .offcanvas {
           justify-content: left !important;
           margin: 0 !important;
           padding: 0 !important;
-
+          padding-bottom: 1rem !important;
           .nav-link {
             color: #fff !important;
-            font-size: 4rem !important;
+            font-size: 3rem !important;
             padding: 0 !important;
             margin: 0 !important;
             text-align: center !important;
-            text-transform: lowercase !important;
+            text-transform: uppercase !important;
             line-height: 1 !important;
+          }
+
+          @media (max-width: 768px) {
+            .nav-link {
+              font-size: 1.5rem !important;
+              margin-bottom: 1rem !important;
+            }
           }
         }
       }
@@ -750,7 +872,6 @@ body .offcanvas {
     .content-wrapper {
       position: relative;
       z-index: 2;
-      padding: 2rem;
       height: 100%;
       display: flex;
       align-items: flex-end;
@@ -782,12 +903,9 @@ body .offcanvas {
             margin-right: 1rem;
           }
 
-          .category-badge {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-            margin-right: 0.5rem;
+          .categories {
+            display: block;
+            margin-bottom: 0.5rem;
           }
         }
       }
@@ -985,67 +1103,829 @@ body .offcanvas.offcanvas-start .offcanvas-header button.btn-close {
 
 // Section titles
 .section-title {
-    font-family: bilo, sans-serif;
-    font-weight: 700; // Bold weight
-    text-transform: lowercase;
-    margin: 0;
-    padding: 2rem 2rem;
-    // If you need specific size/spacing adjustments
-    font-size: 2.5rem !important;
-    line-height: 1;
-    
-    @include media-breakpoint-up(md) {
-        font-size: 2rem;
-    }
+  font-family: bilo, sans-serif;
+  font-weight: 700; // Bold weight
+  text-transform: lowercase;
+  margin: 0;
+  padding: 2rem 0rem;
+  // If you need specific size/spacing adjustments
+  font-size: 2.5rem !important;
+  line-height: 1;
+
+  @include media-breakpoint-up(md) {
+    font-size: 2rem;
+  }
 }
 
 // Display more button styles
 .display-more-wrapper {
-    padding: 2rem;
-    text-align: center;
-    
-    .display-more-button {
-        @extend .bilo;
-        font-weight: 700;
-        text-transform: lowercase;
-        background: none;
-        color: $black !important;
-        border: 2px solid currentColor;
-        padding: 0.75rem 2rem;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        padding-left: 3rem;
-        padding-right: 3rem;
+  padding: 2rem;
+  text-align: center;
 
-        &:hover {
-            background-color: $black !important;
-            color: $white !important;
-        }
+  .display-more-button {
+    @extend .bilo;
+    font-weight: 700;
+    text-transform: lowercase;
+    background: none;
+    color: $black !important;
+    border: 2px solid currentColor;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    padding-left: 3rem;
+    padding-right: 3rem;
+
+    &:hover {
+      background-color: $black !important;
+      color: $white !important;
     }
+  }
 }
 
 // Adjust spacing for grid split layout
 .grid-split-posts-wrapper {
-    .display-more-wrapper {
-        background-color: #fff;
-    }
+  .display-more-wrapper {
+    background-color: #fff;
+  }
 }
 
 // Adjust spacing for fullscreen layout
 .fullscreen-posts-wrapper {
-    .display-more-wrapper {
-        position: relative;
-        z-index: 2;
-        
-        .display-more-button {
-            color: #fff;
-            
-            &:hover {
-                background-color: #fff;
-                color: #000;
-            }
-        }
+  .display-more-wrapper {
+    position: relative;
+    z-index: 2;
+
+    .display-more-button {
+      color: #fff;
+
+      &:hover {
+        background-color: #fff;
+        color: #000;
+      }
     }
+  }
+}
+
+// Footer styles
+
+.site-footer {
+  background-color: $black;
+  color: $white;
+  padding: 4rem 0;
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  // Logo section
+  .footer-logo-row {
+    margin-bottom: 4rem;
+
+    .footer-logo {
+      width: 150px;
+      height: auto;
+      filter: brightness(0) invert(1); // Make logo white
+    }
+  }
+
+  // Content section
+  .footer-content-row {
+    // Footer menu
+    .footer-navigation {
+      .footer-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 1rem;
+
+          a {
+            @extend .bilo;
+            color: $white;
+            text-decoration: none;
+            font-size: 1.35rem;
+            font-weight: $font-weight-bold;
+            transition: opacity 0.3s ease;
+            text-transform: uppercase;
+
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+        }
+      }
+    }
+
+    // Newsletter block
+    .footer-newsletter {
+      margin-bottom: 3rem;
+
+      .newsletter-title {
+        @extend .bilo;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+      }
+
+      .newsletter-form {
+        .input-group {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 0;
+
+          input {
+            @extend .bilo;
+            background: transparent;
+            border: 2px solid $white;
+            margin-left: -1px;
+            color: $white;
+            text-align: center;
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px 8px 0px 0px !important;
+
+            &::placeholder {
+              color: rgba(255, 255, 255, 0.7);
+            }
+
+            &:focus {
+              outline: none;
+              box-shadow: none;
+            }
+          }
+
+          .btn-newsletter {
+            @extend .bilo;
+            background: $white;
+            color: $black;
+            border: 2px solid $white;
+            padding: 0.75rem 2rem;
+            text-transform: uppercase;
+            font-weight: $font-weight-bold;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            width: 100%;
+            margin-top: -2px;
+            border-radius: 0px 0px 8px 8px !important;
+
+            &:hover {
+              background: transparent;
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+
+    // Social block
+    .footer-social {
+      .social-title {
+        @extend .bilo;
+        font-size: 1rem;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        font-weight: $font-weight-bold;
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 1.5rem;
+
+        .social-icon {
+          color: $white;
+          font-size: 1.5rem;
+          transition: opacity 0.3s ease;
+
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+  }
+}
+.footer-bottom {
+  @extend .bilo;
+  padding: 1rem 0;
+  background-color: $black !important;
+  color: $white;
+  text-align: center;
+  width: 100%;
+  margin: auto;
+
+  .container {
+    margin: 0 auto;
+  }
+}
+
+// Responsive adjustments
+@include media-breakpoint-down(md) {
+  .site-footer {
+    .footer-content-row {
+      .col-md-6 {
+        margin-bottom: 3rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+// Category page styles
+.pagination-wrapper {
+  background-color: $white;
+  padding: 2rem;
+  text-align: center;
+
+  .page-numbers {
+    @extend .bilo;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    li {
+      display: inline-block;
+
+      .page-numbers {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: 2px solid $black;
+        color: $black;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: $font-weight-bold;
+
+        &.current {
+          background-color: $black;
+          color: $white;
+        }
+
+        &:hover:not(.current) {
+          background-color: $black;
+          color: $white;
+        }
+
+        &.prev,
+        &.next {
+          width: auto;
+          padding: 0 1rem;
+
+          i {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.no-posts-message {
+  @extend .bilo;
+  text-align: center;
+  padding: 4rem 2rem;
+  font-size: 1.2rem;
+  color: $black;
+}
+
+// Adjust category page title
+#category-wrapper {
+  .section-title {
+    margin: 0;
+    padding: 1rem 0rem;
+    font-size: 4rem !important;
+    font-weight: $font-weight-bold;
+    margin-top: 80px;
+  }
+}
+
+// Single post styles
+.single-post {
+  // Hero section (based on articles_full_screen)
+  .hero-section {
+    height: 100vh;
+    padding: 4rem 0;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: end;
+    color: #fff;
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .content-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .content-wrapper-aligner {
+      display: flex;
+      flex-direction: column;
+      max-width: 1000px;
+
+      // Specific order for single post
+      .categories {
+        order: 1;
+        margin-bottom: 1.5rem;
+        display: block;
+
+        .category-badge {
+          display: inline-block;
+          padding: 0.25rem 1rem;
+          margin-right: 0.5rem;
+          margin-bottom: 0.5rem;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 20px;
+          font-size: 0.875rem;
+          text-transform: uppercase;
+        }
+      }
+
+      .entry-title {
+        order: 2;
+        @extend .pt-serif-bold !optional;
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .excerpt {
+        order: 3;
+        @extend .pt-serif-regular !optional;
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.9;
+      }
+
+      .post-meta {
+        order: 4;
+        @extend .bilo;
+        margin-bottom: 1.5rem;
+
+        .post-date {
+          font-size: 1rem;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  // Content section
+  .entry-content-wrapper {
+    padding: 2rem 0 2rem 0;
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .entry-content {
+      @extend .pt-serif-regular !optional;
+      font-size: 1.2rem;
+      line-height: 1.8;
+
+      p {
+        margin-bottom: 2rem;
+      }
+
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 3rem 0 1.5rem;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        margin: 2rem 0;
+      }
+
+      .wp-caption-text {
+        margin-top: -1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        font-style: italic;
+      }
+
+      // Add more content styling as needed
+    }
+  }
+}
+
+// Responsive adjustments
+@include media-breakpoint-down(md) {
+  .single-post {
+    .hero-section {
+      .content-wrapper-aligner {
+        .entry-title {
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+}
+
+// Related Posts Section
+.related-posts-section {
+  padding: 4rem 0;
+  background-color: $white;
+
+  .container {
+    max-width: 1400px;
+  }
+
+  .related-posts-title {
+    @extend .bilo;
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 4rem;
+  }
+
+  .row {
+    margin: 0 2px; // Remove the gap between columns
+  }
+
+  .col-md-4 {
+    padding: 0 1px; // Minimal padding to prevent background bleed
+  }
+
+  .related-post-card {
+    margin-bottom: 2rem;
+
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+      margin-bottom: 1.5rem;
+      overflow: hidden; // Ensure the zoom effect stays within bounds
+
+      .post-thumbnail {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+
+        &::before {
+          // Add a pseudo-element for the zoom effect
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: inherit;
+          background-size: cover;
+          background-position: center;
+          transition: transform 0.6s ease;
+        }
+
+        .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, 0.6);
+          z-index: 1;
+        }
+
+        .content {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 2rem;
+          color: $white;
+          z-index: 2;
+          transform: none; // Ensure content doesn't move
+          transition: none; // Remove any transition from content
+
+          h3 {
+            @extend .pt-serif-bold !optional;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+          }
+
+          .post-date {
+            @extend .bilo;
+            font-size: 0.875rem;
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+
+    .image-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        .post-thumbnail::before {
+          // Apply zoom effect to the pseudo-element
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .excerpt {
+      @extend .bilo;
+      font-weight: $font-weight-bold;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: $black;
+      padding: 0 1rem;
+    }
+  }
+
+  // Load More Button (similar to display-more-button)
+  .load-more-wrapper {
+    text-align: center;
+    margin-top: 3rem;
+
+    .load-more-button {
+      @extend .bilo;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      background: none;
+      color: $black !important;
+      border: 2px solid currentColor;
+      padding: 0.75rem 3rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      padding-left: 3rem;
+      padding-right: 3rem;
+
+      &:hover {
+        background-color: $black !important;
+        color: $white !important;
+      }
+    }
+  }
+
+  .related-posts-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 0 -15px;
+
+    // Hide scrollbar but keep functionality
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE and Edge
+    &::-webkit-scrollbar {
+      display: none; // Chrome, Safari, Opera
+    }
+  }
+
+  .related-post-card {
+    height: 100%;
+    margin: 1px 1px;
+    padding-bottom: 20px;
+  }
+}
+
+// Responsive adjustments
+@include media-breakpoint-down(md) {
+  .related-posts-section {
+    .related-post-card {
+      .image-wrapper {
+        margin-bottom: 1rem;
+      }
+
+      .excerpt {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+// Sponsor Banner
+.sponsor-banner {
+  text-align: center;
+
+  // Margin variations
+  &.sponsor-margin-none {
+    margin: 0;
+  }
+
+  &.sponsor-margin-xs {
+    margin: 0.66rem 0;
+  }
+
+  &.sponsor-margin-sm {
+    margin: 1.32rem 0;
+  }
+
+  &.sponsor-margin-default {
+    margin: 2rem 0;
+  }
+
+  &.sponsor-margin-lg {
+    margin: 3rem 0;
+  }
+
+  &.sponsor-margin-xl {
+    margin: 4rem 0;
+  }
+
+  &.sponsor-margin-huge {
+    margin: 6rem 0;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .sponsor-title {
+    @extend .bilo;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: rgba($black, 0.5);
+  }
+
+  .sponsor-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 20%; // 10:3 ratio
+    overflow: hidden;
+
+    .sponsor-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover .sponsor-image {
+      transform: scale(1.02);
+    }
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+  }
+}
+
+// Responsive adjustments
+@include media-breakpoint-down(md) {
+  .sponsor-banner {
+    &.sponsor-margin-xs {
+      margin: 0.5rem 0;
+    }
+
+    &.sponsor-margin-sm {
+      margin: 1rem 0;
+    }
+
+    &.sponsor-margin-default {
+      margin: 1.5rem 0;
+    }
+
+    &.sponsor-margin-lg {
+      margin: 2rem 0;
+    }
+
+    &.sponsor-margin-xl {
+      margin: 3rem 0;
+    }
+
+    &.sponsor-margin-huge {
+      margin: 4rem 0;
+    }
+  }
+}
+
+// HIDE LINKEDIN FOR NOW:
+
+.fa-linkedin-in {
+  display: none !important;
+}
+
+// Global scrollbar hiding
+* {
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE and Edge
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, Opera
+  }
+}
+
+// Utility classes
+.mt-80 {
+  margin-top: 80px;
+}
+
+// Search Results Styles
+#search-wrapper {
+  .page-header {
+    margin-bottom: 2rem;
+
+    .page-title {
+      @extend .bilo;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  article {
+    padding: 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .entry-title {
+      @extend .bilo;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+
+      a {
+        color: $black;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .entry-summary {
+      @extend .pt-serif-regular !optional;
+      margin-bottom: 1rem;
+    }
+
+    .entry-meta {
+      margin-bottom: 1rem;
+
+      small {
+        @extend .bilo;
+        font-style: italic;
+      }
+    }
+
+    .entry-footer {
+      .btn-outline-primary {
+        @extend .bilo;
+        border: 2px solid $black;
+        color: $black;
+        text-transform: uppercase;
+        padding: 0.5rem 1.5rem;
+        font-weight: 700;
+
+        &:hover {
+          background-color: $black;
+          color: $white;
+        }
+      }
+    }
+  }
 }

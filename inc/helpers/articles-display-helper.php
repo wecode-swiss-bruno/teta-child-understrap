@@ -108,10 +108,6 @@ function render_post_meta($posts_handling, $post) {
     }
     ?>
     <div class="post-meta">
-        <?php if ($display_date) : ?>
-            <span class="post-date"><?php echo esc_html(get_the_date('j F Y', $post)); ?></span>
-        <?php endif; ?>
-
         <?php if ($display_categories) : 
             $categories = get_the_category($post); ?>
             <?php if ($categories) : ?>
@@ -121,6 +117,10 @@ function render_post_meta($posts_handling, $post) {
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if ($display_date) : ?>
+            <div class="post-date"><?php echo esc_html(get_the_date('j F Y', $post)); ?></div>
         <?php endif; ?>
     </div>
     <?php
@@ -192,9 +192,11 @@ function render_section_title($title, $section_id, $classes = '') {
         $title_classes .= ' ' . $classes;
     }
     ?>
-    <h2 id="<?php echo esc_attr($section_id); ?>" class="<?php echo esc_attr($title_classes); ?>">
-        <?php echo esc_html($title); ?>
-    </h2>
+    <div class="container mx-auto px-3 px-md-0">
+        <h2 id="<?php echo esc_attr($section_id); ?>" class="<?php echo esc_attr($title_classes); ?>">
+            <?php echo esc_html($title); ?>
+        </h2>
+    </div>
     <?php
 }
 
