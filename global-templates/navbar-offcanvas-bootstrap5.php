@@ -98,7 +98,8 @@ $container = "container";
 
 				<div class="offcanvas-nav">
 					<?php
-					wp_nav_menu(
+					wp_nav_menu( 
+						
 						array(
 							'theme_location' => 'primary',
 							'container'      => false,
