@@ -1,0 +1,57 @@
+// Spacing Helpers
+.m-0-auto { margin: 0 auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.my-auto { margin-top: auto; margin-bottom: auto; }
+
+// Display Helpers
+.d-flex { display: flex !important; }
+.d-none { display: none !important; }
+.d-block { display: block !important; }
+
+// Flex Helpers
+.flex-center {
+  @include flex-center;
+}
+
+.flex-between {
+  @include flex-between;
+}
+
+.flex-column { flex-direction: column !important; }
+.flex-row { flex-direction: row !important; }
+
+// Text Helpers
+.text-center { text-align: center !important; }
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+
+.text-truncate {
+  @include truncate(1);
+}
+
+.text-truncate-2 {
+  @include truncate(2);
+}
+
+// Position Helpers
+.position-relative { position: relative !important; }
+.position-absolute { position: absolute !important; }
+.position-fixed { position: fixed !important; }
+
+// Z-index Helpers
+.z-1 { z-index: 1 !important; }
+.z-2 { z-index: 2 !important; }
+.z-3 { z-index: 3 !important; }
+
+// Responsive Helpers
+@include mobile-only {
+  .hide-mobile { display: none !important; }
+}
+
+@include tablet-up {
+  .hide-tablet-up { display: none !important; }
+}
+
+@include desktop-up {
+  .hide-desktop { display: none !important; }
+} 

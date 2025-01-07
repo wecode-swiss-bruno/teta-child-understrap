@@ -26,26 +26,27 @@ if ($posts) : ?>
             setup_postdata($post);
             $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'full');
         ?>
-            <section class="article-full-screen" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
-                <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
-                <div class="container mx-auto px-3 px-md-0">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="content-wrapper">
-                                <div class="content-wrapper-aligner">
-                                    <a href="<?php echo get_permalink($post); ?>" class="post-link">
+            <a href="<?php echo get_permalink($post); ?>" class="post-link">
+                <section class="article-full-screen" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
+                    <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
+                    <div class="container mx-auto">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content-wrapper">
+                                    <div class="content-wrapper-aligner">
                                         <h2><?php echo esc_html(get_the_title($post)); ?></h2>
                                         <div class="excerpt">
                                             <?php echo wp_kses_post(get_the_excerpt($post)); ?>
                                         </div>
                                         <?php render_post_meta($posts_handling, $post); ?>
-                                    </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </a>
+
         <?php endforeach; ?>
         <?php render_display_more($posts_handling, $section_id); ?>
     </div>

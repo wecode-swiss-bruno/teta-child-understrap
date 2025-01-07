@@ -1,0 +1,31 @@
+// Article Base Styles
+%article-base {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: $white;
+}
+
+// Fullscreen Articles
+.fullscreen-posts-wrapper {
+  .article-full-screen {
+    @extend %article-base;
+    height: 100vh;
+    padding: 4rem 0;
+    display: flex;
+    align-items: end;
+
+    @include article-responsive;
+  }
+}
+
+// Grid Split Articles
+.grid-split-posts-wrapper {
+  min-height: 100vh;
+
+  .grid-article {
+    @extend %article-base;
+    @include grid-article-responsive;
+  }
+} 

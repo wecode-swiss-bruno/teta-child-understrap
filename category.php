@@ -43,7 +43,7 @@ $posts_handling = array(
     'display_categories' => true,
     'overlay' => array(
         'overlay_color' => '#000000',
-        'overlay_opacity' => 60
+        'overlay_opacity' => 30
     )
 );
 
@@ -57,7 +57,7 @@ $section_id = generate_section_id('category-articles', $section_title);
         <?php if ($query->have_posts()) : ?>
             <div class="fullscreen-posts-wrapper">
                 <div class="container mx-auto">
-                <h1 id="<?php echo esc_attr($section_id); ?>" class="section-title">
+                    <h1 id="<?php echo esc_attr($section_id); ?>" class="section-title">
                         <?php echo esc_html($category->name); ?>.
                     </h1>
                 </div>
@@ -66,27 +66,35 @@ $section_id = generate_section_id('category-articles', $section_title);
                 while ($query->have_posts()) :
                     $query->the_post();
                     $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                    $overlay_opacity = get_field('overlay_opacity') ?? 45;
+                    if (is_numeric($overlay_opacity)) {
+                        $overlay_opacity = $overlay_opacity / 100;
+                    } else {
+                        $overlay_opacity = 0.45;
+                    }
                 ?>
-                    <section class="article-full-screen" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
-                        <div class="overlay" style="background-color: <?php echo esc_attr(sprintf('rgba(0, 0, 0, %s)', 0.6)); ?>;"></div>
-                        <div class="container mx-auto">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="content-wrapper">
-                                        <div class="content-wrapper-aligner">
-                                            <a href="<?php the_permalink(); ?>" class="post-link">
+                    <a href="<?php the_permalink(); ?>" class="post-link">
+
+                        <section class="article-full-screen" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
+                            <div class="overlay" style="background-color: <?php echo esc_attr(sprintf('rgba(0, 0, 0, %s)', $overlay_opacity)); ?>;"></div>
+                            <div class="container mx-auto">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="content-wrapper">
+                                            <div class="content-wrapper-aligner">
                                                 <h2><?php the_title(); ?></h2>
                                                 <div class="excerpt">
                                                     <?php the_excerpt(); ?>
                                                 </div>
                                                 <?php render_post_meta($posts_handling, $post); ?>
-                                            </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </a>
+
                 <?php endwhile; ?>
 
                 <?php if ($query->max_num_pages > 1) : ?>

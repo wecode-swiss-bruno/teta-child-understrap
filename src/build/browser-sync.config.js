@@ -1,10 +1,16 @@
 module.exports = {
-    proxy: "teta.wecode.local",
+    proxy: "http://teta.wecode.local",
     port: 3000,
-    https: true,
+    https: false,
     open: false,
     notify: false,
-    // Amélioration de la configuration des fichiers à surveiller
+    middleware: function (req, res, next) {
+        if (req.headers.host.indexOf(':3000') > -1) {
+            return next();
+        }
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        next();
+    },
     files: [
         './css/*.css',
         './js/*.js',
@@ -12,15 +18,17 @@ module.exports = {
         './**/*.scss',
         './img/**/*',
         '!./node_modules/**/*',
-        '!./src/**/*.scss'  // Exclure les fichiers source SCSS
+        '!./src/**/*.scss'
     ],
-    // Ajouter ces options pour améliorer la réactivité
     watchEvents: ['change', 'add', 'unlink', 'addDir', 'unlinkDir'],
     ignore: [
         'node_modules/**/*',
-        'src/sass/**/*.scss'  // Ignorer les fichiers SCSS sources
+        'src/sass/**/*.scss'
     ],
     reloadDelay: 0,
     reloadDebounce: 0,
-    injectChanges: true
+    injectChanges: true,
+    snippetOptions: {
+        ignorePaths: ["wp-admin/**"]
+    }
 };

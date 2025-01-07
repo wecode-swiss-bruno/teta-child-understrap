@@ -1,0 +1,19 @@
+// Margin utilities
+.mt-80 {
+  margin-top: 80px;
+}
+
+// Padding utilities
+.p-0 {
+  padding: 0 !important;
+}
+
+// Container spacing
+@media (max-width: 768px) {
+  .container {
+    padding: {
+      left: 1rem;
+      right: 1rem;
+    }
+  }
+} 

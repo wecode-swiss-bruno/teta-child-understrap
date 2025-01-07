@@ -1,0 +1,83 @@
+@mixin nav-link {
+  @extend .bilo;
+  color: $black;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: $font-weight-bold;
+  padding: 0;
+  position: relative;
+  
+  // Underline animation
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: $black;
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: calc(100% + 10px);
+  }
+}
+
+@mixin offcanvas-base {
+  background: rgba(0, 0, 0, 0.9) !important;
+  width: 100% !important;
+  height: 100vh !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  
+  .offcanvas-header {
+    @include offcanvas-header;
+  }
+
+  .offcanvas-body {
+    @include offcanvas-body;
+  }
+
+  &.showing,
+  &.show {
+    .offcanvas-nav .nav-item {
+      @include slide-in-animation;
+    }
+  }
+}
+
+@mixin offcanvas-header {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  padding: 0;
+  z-index: 2;
+
+  .btn-close {
+    @include close-button;
+  }
+}
+
+@mixin offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 1rem !important;
+  height: 100vh;
+  color: $white;
+
+  .offcanvas-logo {
+    @include offcanvas-logo;
+  }
+
+  .offcanvas-nav {
+    @include offcanvas-nav;
+  }
+
+  .offcanvas-social {
+    @include offcanvas-social;
+  }
+} 

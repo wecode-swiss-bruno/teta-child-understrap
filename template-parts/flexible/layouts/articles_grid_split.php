@@ -21,7 +21,7 @@ $section_id = generate_section_id('grid-split-articles', $section_title);
 if ($posts && count($posts) >= 4) : ?>
     <div class="grid-split-posts-wrapper">
         <?php render_section_title($section_title, $section_id); ?>
-        <div class="container-fluid p-0">
+        <div class="container-fluid g-0">
             <div class="row g-0">
                 <!-- Left Column -->
                 <div class="col-md-6">
@@ -32,20 +32,22 @@ if ($posts && count($posts) >= 4) : ?>
                         setup_postdata($post);
                         $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'full');
                         ?>
+
                         <div class="col-12">
-                            <article class="grid-article grid-article-large" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
-                                <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
-                                <div class="content-wrapper p-3 p-md-4 p-lg-5">
-                                    <a href="<?php echo get_permalink($post); ?>" class="post-link">
+                            <a href="<?php echo get_permalink($post); ?>" class="post-link">
+                                <article class="grid-article grid-article-large " <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
+                                    <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
+                                    <div class="content-wrapper p-4 p-md-4 p-lg-5">
                                         <h2><?php echo esc_html(get_the_title($post)); ?></h2>
                                         <div class="excerpt">
                                             <?php echo wp_kses_post(get_the_excerpt($post)); ?>
                                         </div>
                                         <?php render_post_meta($posts_handling, $post); ?>
-                                    </a>
-                                </div>
-                            </article>
+                                    </div>
+                                </article>
+                            </a>
                         </div>
+
 
                         <!-- Bottom Two Articles -->
                         <?php for ($i = 1; $i <= 2; $i++) :
@@ -53,20 +55,22 @@ if ($posts && count($posts) >= 4) : ?>
                             setup_postdata($post);
                             $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'full');
                         ?>
+
                             <div class="col-md-6">
-                                <article class="grid-article grid-article-medium" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
-                                    <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
-                                    <div class="content-wrapper p-3 p-md-4 p-lg-5">
-                                    <a href="<?php echo get_permalink($post); ?>" class="post-link">
+                                <a href="<?php echo get_permalink($post); ?>" class="post-link">
+                                    <article class="grid-article grid-article-medium" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
+                                        <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
+                                        <div class="content-wrapper p-4 p-md-4 p-lg-5">
                                             <h2><?php echo esc_html(get_the_title($post)); ?></h2>
                                             <div class="excerpt">
                                                 <?php echo wp_kses_post(get_the_excerpt($post)); ?>
                                             </div>
                                             <?php render_post_meta($posts_handling, $post); ?>
-                                        </a>
-                                    </div>
-                                </article>
+                                        </div>
+                                    </article>
+                                </a>
                             </div>
+
                         <?php endfor; ?>
                     </div>
                 </div>
@@ -78,18 +82,20 @@ if ($posts && count($posts) >= 4) : ?>
                     setup_postdata($post);
                     $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'full');
                     ?>
-                    <article class="grid-article grid-article-full" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
-                        <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
-                        <div class="content-wrapper p-3 p-md-4 p-lg-5">
-                        <a href="<?php echo get_permalink($post); ?>" class="post-link">
+                    <a href="<?php echo get_permalink($post); ?>" class="post-link">
+
+                        <article class="grid-article grid-article-full" <?php if ($thumbnail_url) : ?>style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');" <?php endif; ?>>
+                            <div class="overlay" style="background-color: <?php echo esc_attr($overlay['rgba']); ?>;"></div>
+                            <div class="content-wrapper p-4 p-md-4 p-lg-5">
                                 <h2><?php echo esc_html(get_the_title($post)); ?></h2>
                                 <div class="excerpt">
                                     <?php echo wp_kses_post(get_the_excerpt($post)); ?>
                                 </div>
                                 <?php render_post_meta($posts_handling, $post); ?>
-                            </a>
-                        </div>
-                    </article>
+                            </div>
+                        </article>
+                    </a>
+
                 </div>
             </div>
         </div>

@@ -13,50 +13,45 @@ defined('ABSPATH') || exit;
  *
  * @param array $posts_handling ACF posts_handling field
  * @param int $posts_count Number of posts to retrieve
+ * @param int $offset Offset for pagination
  * @return array
  */
-function get_posts_by_settings($posts_handling, $posts_count) {
+function get_posts_by_settings($posts_handling, $posts_count, $offset = 0) {
     if (empty($posts_handling['posts_selection'])) {
         return [];
     }
 
     switch ($posts_handling['posts_selection']) {
         case 'manual':
-            return $posts_handling['posts'] ?? [];
+            // For manual selection, handle offset manually
+            $all_posts = $posts_handling['posts'] ?? [];
+            return array_slice($all_posts, $offset, $posts_count);
             
         case 'categories':
+        case 'featured':
+        case 'lasts':
             $args = [
                 'post_type' => 'post',
                 'posts_per_page' => $posts_count,
+                'offset' => $offset,
+                'orderby' => 'date',
+                'order' => 'DESC'
             ];
             
             if (!empty($posts_handling['categories_to_display'])) {
                 $args['category__in'] = $posts_handling['categories_to_display'];
             }
             
-            $query = new WP_Query($args);
-            return $query->posts;
-            
-        case 'featured':
-            $args = [
-                'post_type' => 'post',
-                'posts_per_page' => $posts_count,
-                'meta_query' => [
+            if ($posts_handling['posts_selection'] === 'featured') {
+                $args['meta_query'] = [
                     [
                         'key' => '_is_featured',
                         'value' => '1',
                         'compare' => '='
                     ]
-                ]
-            ];
-            $query = new WP_Query($args);
-            return $query->posts;
+                ];
+            }
             
-        case 'lasts':
-            $args = [
-                'post_type' => 'post',
-                'posts_per_page' => $posts_count,
-            ];
             $query = new WP_Query($args);
             return $query->posts;
             
@@ -192,7 +187,7 @@ function render_section_title($title, $section_id, $classes = '') {
         $title_classes .= ' ' . $classes;
     }
     ?>
-    <div class="container mx-auto px-3 px-md-0">
+    <div class="container mx-auto">
         <h2 id="<?php echo esc_attr($section_id); ?>" class="<?php echo esc_attr($title_classes); ?>">
             <?php echo esc_html($title); ?>
         </h2>
@@ -214,12 +209,18 @@ function render_display_more($posts_handling, $section_id) {
     if (!$show_display_more) {
         return;
     }
+
+    // Debug the data being passed to the button
+    error_log('Display more data: ' . print_r([
+        'section' => $section_id,
+        'posts_handling' => $posts_handling
+    ], true));
     ?>
     <div class="display-more-wrapper">
         <button 
             class="display-more-button" 
             data-section="<?php echo esc_attr($section_id); ?>"
-            data-posts-handling='<?php echo esc_attr(json_encode($posts_handling)); ?>'
+            data-posts-handling='<?php echo esc_attr(wp_json_encode($posts_handling)); ?>'
         >
             <?php echo esc_html($display_more_text); ?>
         </button>

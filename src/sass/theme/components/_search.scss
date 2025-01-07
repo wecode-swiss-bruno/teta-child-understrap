@@ -1,0 +1,19 @@
+#search-wrapper {
+  .page-header {
+    margin-bottom: 2rem;
+
+    .page-title {
+      @extend .bilo;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  article {
+    @include search-result-article;
+  }
+}
+
+.search-form-wrapper {
+  @include search-form;
+} 

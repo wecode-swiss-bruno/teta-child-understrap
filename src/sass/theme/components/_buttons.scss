@@ -1,0 +1,16 @@
+.display-more-wrapper {
+  padding: 2rem;
+  text-align: center;
+
+  .display-more-button {
+    @include display-more-button;
+  }
+}
+
+.btn-newsletter {
+  @include newsletter-button;
+}
+
+.btn-outline-primary {
+  @include outline-button;
+} 

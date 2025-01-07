@@ -1,0 +1,24 @@
+.sponsor-banner {
+  text-align: center;
+
+  @include sponsor-margins;
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .sponsor-title {
+    @include sponsor-title;
+  }
+
+  .sponsor-image-wrapper {
+    @include sponsor-image;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .sponsor-banner {
+    @include sponsor-margins-mobile;
+  }
+} 

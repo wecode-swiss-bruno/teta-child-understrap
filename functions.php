@@ -165,8 +165,14 @@ function understrap_child_enqueue_scripts() {
         true
     );
     
-    // Enqueue your custom JavaScript
-    wp_enqueue_script('custom-js', get_stylesheet_directory_uri() . '/src/js/custom-javascript.js', array('jquery', 'bootstrap'), null, true);
+    // Enqueue your custom JavaScript with AJAX variables
+    wp_enqueue_script('custom-js', get_stylesheet_directory_uri() . '/js/child-theme.min.js', array('jquery', 'bootstrap'), null, true);
+    
+    // Add AJAX variables to the main script
+    wp_localize_script('custom-js', 'tetazAjax', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('tetaz_load_more_nonce')
+    ));
 }
 add_action('wp_enqueue_scripts', 'understrap_child_enqueue_scripts');
 
@@ -193,4 +199,211 @@ function tetaz_dev_load_theme_textdomain() {
     load_theme_textdomain('tetaz-dev', get_template_directory() . '/languages');
 }
 add_action('after_setup_theme', 'tetaz_dev_load_theme_textdomain');
+
+/**
+ * AJAX handler for loading more posts
+ */
+function tetaz_load_more_posts() {
+    // Debug information
+    error_log('Load more posts request received: ' . print_r($_POST, true));
+
+    // Verify nonce
+    if (!wp_verify_nonce($_POST['nonce'], 'tetaz_load_more_nonce')) {
+        wp_send_json_error('Invalid nonce');
+    }
+
+    $page = intval($_POST['page']);
+    $section = sanitize_text_field($_POST['section']);
+    $posts_handling = json_decode(stripslashes($_POST['posts_handling']), true);
+    
+    // Debug decoded data
+    error_log('Decoded posts handling: ' . print_r($posts_handling, true));
+    
+    // Calculate offset based on the original posts count
+    $posts_per_page = $posts_handling['number_of_posts_to_display'] ?? 3;
+    $offset = ($page - 1) * $posts_per_page;
+    
+    // Get posts with offset
+    $posts = get_posts_by_settings($posts_handling, $posts_per_page, $offset);
+    
+    // Debug retrieved posts
+    error_log('Retrieved posts: ' . print_r($posts, true));
+
+    if (empty($posts)) {
+        wp_send_json_success([
+            'html' => '',
+            'has_more' => false
+        ]);
+    }
+
+    // Start output buffering to capture the HTML
+    ob_start();
+    
+    // Determine which template to use based on the section
+    if (strpos($section, 'fullscreen-articles') !== false) {
+        foreach ($posts as $post) {
+            setup_postdata($post);
+            include(get_stylesheet_directory() . '/template-parts/flexible/partials/article-fullscreen.php');
+        }
+    } else if (strpos($section, 'grid-split-articles') !== false) {
+        include(get_stylesheet_directory() . '/template-parts/flexible/partials/articles-grid-split-row.php');
+    }
+    
+    wp_reset_postdata();
+    
+    $html = ob_get_clean();
+    
+    // Check if there are more posts
+    $next_posts = get_posts_by_settings($posts_handling, $posts_per_page, $offset + $posts_per_page);
+    $has_more = !empty($next_posts);
+    
+    wp_send_json_success([
+        'html' => $html,
+        'has_more' => $has_more
+    ]);
+}
+add_action('wp_ajax_load_more_posts', 'tetaz_load_more_posts');
+add_action('wp_ajax_nopriv_load_more_posts', 'tetaz_load_more_posts');
+
+/**
+ * AJAX handler for loading more related posts
+ */
+function tetaz_load_more_related_posts() {
+    // Debug information
+    error_log('Loading more related posts...');
+
+    // Verify nonce
+    if (!wp_verify_nonce($_POST['nonce'], 'tetaz_load_more_nonce')) {
+        wp_send_json_error('Invalid nonce');
+    }
+
+    $page = intval($_POST['page']);
+    $current_post_id = intval($_POST['current_post_id']);
+    $posts_per_page = 3;
+    $offset = ($page - 1) * $posts_per_page;
+
+    // Get related posts based on categories
+    $categories = wp_get_post_categories($current_post_id);
+    
+    $args = array(
+        'category__in' => $categories,
+        'post__not_in' => array($current_post_id),
+        'posts_per_page' => $posts_per_page,
+        'offset' => $offset,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'post_status' => 'publish'  // Make sure we only get published posts
+    );
+
+    // Use WP_Query instead of get_posts to ensure all post data is available
+    $query = new WP_Query($args);
+    
+    if (!$query->have_posts()) {
+        wp_send_json_success([
+            'html' => '',
+            'has_more' => false
+        ]);
+    }
+
+    // Start output buffering to capture the HTML
+    ob_start();
+    
+    while ($query->have_posts()) {
+        $query->the_post();
+        global $post;
+        
+        // Debug post data
+        error_log('Processing post: ' . print_r($post, true));
+        
+        include(get_stylesheet_directory() . '/template-parts/flexible/partials/related-post-card.php');
+    }
+    
+    // Reset post data
+    wp_reset_postdata();
+    
+    $html = ob_get_clean();
+    
+    // Check if there are more posts
+    $next_query = new WP_Query(array_merge($args, ['offset' => $offset + $posts_per_page]));
+    $has_more = $next_query->have_posts();
+    wp_reset_postdata();  // Reset again after checking for more posts
+    
+    wp_send_json_success([
+        'html' => $html,
+        'has_more' => $has_more
+    ]);
+}
+add_action('wp_ajax_load_more_related_posts', 'tetaz_load_more_related_posts');
+add_action('wp_ajax_nopriv_load_more_related_posts', 'tetaz_load_more_related_posts');
+
+/**
+ * Hide parent theme page templates
+ *
+ * @param array $page_templates Array of page templates. Keys are filenames, values are translated names.
+ * @param WP_Theme $theme Theme object
+ * @param WP_Post $post The post being edited, provided for context, or null.
+ * @param string $post_type Post type to get templates for.
+ * @return array Modified array of page templates
+ */
+function tetaz_remove_parent_theme_templates($page_templates, $theme, $post, $post_type) {
+    // Get the current theme directory
+    $current_theme = get_stylesheet_directory();
+    
+    // Filter templates to only include those from the child theme
+    foreach ($page_templates as $template_file => $template_name) {
+        // Get the full path of the template
+        $template_path = locate_template($template_file);
+        
+        // If template is not in current theme directory, remove it
+        if (strpos($template_path, $current_theme) === false) {
+            unset($page_templates[$template_file]);
+        }
+    }
+    
+    return $page_templates;
+}
+add_filter('theme_page_templates', 'tetaz_remove_parent_theme_templates', 10, 4);
+
+/**
+ * Newsletter form submission handler
+ */
+function tetaz_handle_newsletter_submission() {
+    // Verify nonce for security
+    if (!wp_verify_nonce($_POST['nonce'], 'tetaz_newsletter_nonce')) {
+        wp_send_json_error('Invalid nonce');
+    }
+
+    // Get and sanitize the email
+    $email = sanitize_email($_POST['email']);
+    if (!is_email($email)) {
+        wp_send_json_error('Invalid email address');
+    }
+
+    // Here you would typically:
+    // 1. Save to your newsletter service (Mailchimp, SendinBlue, etc.)
+    // 2. Or save to a custom table/post type
+    // For now, we'll just return success
+    
+    // You can add your newsletter service integration here
+    
+    wp_send_json_success('Thank you for subscribing!');
+}
+add_action('wp_ajax_tetaz_newsletter_submit', 'tetaz_handle_newsletter_submission');
+add_action('wp_ajax_nopriv_tetaz_newsletter_submit', 'tetaz_handle_newsletter_submission');
+
+/**
+ * Enqueue scripts and styles.
+ */
+function tetaz_scripts() {
+    // Add AJAX URL and nonce to script
+    wp_localize_script(
+        'tetaz-newsletter',
+        'tetazAjax',
+        array(
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('tetaz_newsletter_nonce')
+        )
+    );
+}
+add_action('wp_enqueue_scripts', 'tetaz_scripts');
 

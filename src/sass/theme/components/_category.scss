@@ -1,0 +1,22 @@
+#category-wrapper {
+  .section-title {
+    @include section-title;
+    margin-top: 80px;
+
+    @media (max-width: 768px) {
+      font-size: 2rem !important;
+    }
+  }
+}
+
+.category-badge {
+  @include category-badge;
+}
+
+.no-posts-message {
+  @extend .bilo;
+  text-align: center;
+  padding: 4rem 2rem;
+  font-size: 1.2rem;
+  color: $black;
+} 

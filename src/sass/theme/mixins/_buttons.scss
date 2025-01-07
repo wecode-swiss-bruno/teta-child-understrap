@@ -1,0 +1,67 @@
+@mixin button-base {
+  @extend .bilo;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+@mixin display-more-button {
+  @include button-base;
+  background: none;
+  color: $black;
+  border: 2px solid currentColor;
+  padding: 0.75rem 3rem;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: $black;
+    color: $white;
+  }
+
+  &.loading {
+    opacity: 0.7;
+    cursor: wait;
+    
+    &::after {
+      content: "...";
+      display: inline-block;
+      animation: loading-dots 1s infinite;
+    }
+  }
+}
+
+@mixin newsletter-button {
+  @include button-base;
+  background: $white;
+  color: $black;
+  border: 2px solid $white;
+  padding: 0.75rem 2rem;
+  width: 100%;
+  margin-top: -2px;
+  border-radius: 0px 0px 8px 8px !important;
+
+  &:hover {
+    background: transparent;
+    color: $white;
+  }
+}
+
+@mixin outline-button {
+  @include button-base;
+  background: transparent;
+  border: 2px solid currentColor;
+  padding: 0.5rem 1.5rem;
+  
+  &:hover {
+    background-color: currentColor;
+    color: $white;
+  }
+} 

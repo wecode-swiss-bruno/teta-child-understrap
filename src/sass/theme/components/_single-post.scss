@@ -1,0 +1,16 @@
+.single-post {
+  // Hero section
+  .hero-section {
+    @include post-hero;
+  }
+
+  // Content section
+  .entry-content-wrapper {
+    @include post-content;
+  }
+}
+
+// Related Posts Section
+.related-posts-section {
+  @include related-posts;
+} 

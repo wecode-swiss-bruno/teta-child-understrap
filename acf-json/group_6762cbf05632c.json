@@ -1,0 +1,68 @@
+{
+    "key": "group_6762cbf05632c",
+    "title": "Collaboration",
+    "fields": [
+        {
+            "key": "field_6762cbf0b9072",
+            "label": "Article PDF",
+            "name": "article_pdf",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "uploader": "",
+            "return_format": "url",
+            "preview_style": "default",
+            "library": "all",
+            "upload_folder": "",
+            "button_label": "Ajouter l'article PDF",
+            "file_count": 0,
+            "multiple": 0,
+            "max": "",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "placeholder": "Select",
+            "stylised_button": 0,
+            "min": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "collaboration"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "left",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_autosync": [
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_display_title": "",
+    "acfe_meta": {
+        "acfcloneindex": {
+            "acfe_meta_key": "",
+            "acfe_meta_value": ""
+        }
+    },
+    "acfe_note": "",
+    "modified": 1734690754
+}

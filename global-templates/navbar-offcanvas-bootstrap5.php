@@ -29,7 +29,7 @@ $container = "container";
 				array(
 					'theme_location' => 'left_menu',
 					'container'      => false,
-					'menu_class'    => 'navbar-nav d-none d-md-flex',
+					'menu_class'    => 'navbar-nav d-none d-lg-flex',
 					'fallback_cb'   => '',
 					'menu_id'       => 'left-menu',
 					'depth'         => 1,
@@ -57,7 +57,7 @@ $container = "container";
 				array(
 					'theme_location' => 'right_menu',
 					'container'      => false,
-					'menu_class'    => 'navbar-nav d-none d-md-flex',
+					'menu_class'    => 'navbar-nav d-none d-lg-flex',
 					'fallback_cb'   => '',
 					'menu_id'       => 'right-menu',
 					'depth'         => 1,
@@ -72,7 +72,7 @@ $container = "container";
 					<i class="fa fa-search"></i>
 				</button>
 				<div class="search-form-wrapper mx-auto">
-					<form role="search" method="get" class="search-form container mx-auto justify-content-between px-0" action="<?php echo esc_url(home_url('/')); ?>">
+					<form rol="search" method="get" class="search-form container mx-auto justify-content-between" action="<?php echo esc_url(home_url('/')); ?>">
 						<input type="search" class="search-field" placeholder="Rechercher..." value="<?php echo get_search_query(); ?>" name="s">
 						<button type="button" class="search-close" aria-label="Fermer la recherche">
 							<i class="fa fa-times"></i>
@@ -116,7 +116,7 @@ $container = "container";
 					<a href="#" class="social-icon" target="_blank" rel="noopener noreferrer">
 						<i class="fab fa-linkedin-in"></i>
 					</a>
-					<a href="#" class="social-icon" target="_blank" rel="noopener noreferrer">
+					<a href="https://www.instagram.com/tetamag.ch/" class="social-icon" target="_blank" rel="noopener noreferrer">
 						<i class="fab fa-instagram"></i>
 					</a>
 				</div>

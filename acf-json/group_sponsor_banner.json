@@ -1,0 +1,139 @@
+{
+    "key": "group_sponsor_banner",
+    "title": "Sponsor Banner",
+    "fields": [
+        {
+            "key": "field_sponsor_title",
+            "label": "Title",
+            "name": "sponsor_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Sponsorisé par",
+            "placeholder": "Sponsorisé par",
+            "maxlength": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_sponsor_image",
+            "label": "Banner Image",
+            "name": "sponsor_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Recommended ratio: 10:3",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": "",
+            "uploader": "",
+            "acfe_thumbnail": 0,
+            "upload_folder": ""
+        },
+        {
+            "key": "field_sponsor_link",
+            "label": "Banner Link",
+            "name": "sponsor_link",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "https:\/\/",
+            "default_value": ""
+        },
+        {
+            "key": "field_sponsor_margin",
+            "label": "Margin Size",
+            "name": "sponsor_margin",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "none": "None (0)",
+                "xs": "Extra Small (x0.33)",
+                "sm": "Small (x0.66)",
+                "default": "Default (x1)",
+                "lg": "Large (x1.5)",
+                "xl": "Extra Large (x2)",
+                "huge": "Huge (x3)"
+            },
+            "default_value": "default",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "return_format": "value",
+            "allow_custom": 0,
+            "search_placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            },
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_autosync": [
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_display_title": "",
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1734370263
+}

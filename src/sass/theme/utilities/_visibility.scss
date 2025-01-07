@@ -1,0 +1,48 @@
+// Hide elements
+.hidden {
+  display: none !important;
+}
+
+// Hide scrollbars but keep functionality
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Hide LinkedIn icon
+.fa-linkedin-in {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+// Hide sidebars
+#left-sidebar,
+#right-sidebar,
+.sidebar,
+.widget-area,
+[class*="sidebar-"],
+aside {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+} 

@@ -1,0 +1,111 @@
+// ==========================================================================
+// Theme Variables
+// ==========================================================================
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// ==========================================================================
+// Global Styles
+// ==========================================================================
+html,
+body {
+  background-color: #000 !important;
+  scroll-behavior: smooth;
+}
+
+.site {
+  max-width: 2000px !important;
+  margin: 0 auto !important;
+  background-color: #fff !important;
+}
+
+// Base Typography
+body {
+  font-family: $font-family-pt;
+  font-weight: $font-weight-regular;
+  padding-top: 0;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  @extend .bilo !optional;
+  font-family: $font-family-bilo;
+  font-weight: $font-weight-bold;
+}
+
+// Layout Reset
+#page-wrapper,
+#content,
+.wrapper,
+.container-fluid,
+.container {
+  padding: 0;
+  margin: 0;
+}
+
+// Global Components
+.navbar,
+.btn,
+.category-badge,
+.post-date,
+input,
+button,
+select,
+textarea {
+  @extend .bilo !optional;
+}
+
+// Hide Scrollbars Globally
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// ==========================================================================
+// Navigation
+// ==========================================================================
+@import "components/navigation";
+
+// ==========================================================================
+// Articles
+// ==========================================================================
+@import "components/articles";
+
+// ==========================================================================
+// Footer
+// ==========================================================================
+@import "components/footer";
+
+// ==========================================================================
+// Category Pages
+// ==========================================================================
+@import "components/category";
+
+// ==========================================================================
+// Single Post
+// ==========================================================================
+@import "components/single-post";
+
+// ==========================================================================
+// Search
+// ==========================================================================
+@import "components/search";
+
+// ==========================================================================
+// Components
+// ==========================================================================
+@import "components/buttons";
+@import "components/category-badge";
+@import "components/pagination";
+@import "components/sponsor-banner";
+
+// ==========================================================================
+// Utilities
+// ==========================================================================
+@import "utilities/spacing";
+@import "utilities/visibility"; 

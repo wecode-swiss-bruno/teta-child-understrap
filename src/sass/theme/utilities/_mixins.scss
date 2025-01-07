@@ -1,0 +1,62 @@
+// Layout Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Typography Mixins
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@mixin responsive-font($min-size: 16, $max-size: 20, $min-width: 320, $max-width: 1200) {
+  font-size: #{$min-size}px;
+  
+  @media screen and (min-width: #{$min-width}px) {
+    font-size: calc(#{$min-size}px + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-width}px) / (#{$max-width} - #{$min-width})));
+  }
+  
+  @media screen and (min-width: #{$max-width}px) {
+    font-size: #{$max-size}px;
+  }
+}
+
+// Media Query Mixins
+@mixin mobile-only {
+  @media (max-width: 767px) { @content; }
+}
+
+@mixin tablet-up {
+  @media (min-width: 768px) { @content; }
+}
+
+@mixin desktop-up {
+  @media (min-width: 992px) { @content; }
+}
+
+@mixin large-desktop-up {
+  @media (min-width: 1200px) { @content; }
+} 

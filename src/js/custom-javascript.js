@@ -139,4 +139,177 @@ document.addEventListener('DOMContentLoaded', function() {
         
         body.classList.remove('modal-open');
     }
+
+    // Post Loader Class
+    class PostLoader {
+        constructor() {
+            this.page = 1;
+            this.loading = false;
+            this.init();
+        }
+
+        init() {
+            document.addEventListener('click', (e) => {
+                const button = e.target.closest('.display-more-button:not(.related-posts-section .display-more-button)');
+                if (button) {
+                    e.preventDefault();
+                    this.handleLoadMore(button);
+                }
+            });
+        }
+
+        async handleLoadMore(button) {
+            if (this.loading) {
+                console.log('Already loading...');
+                return;
+            }
+
+            console.log('Starting load more...', {
+                section: button.dataset.section,
+                postsHandling: button.dataset.postsHandling
+            });
+
+            this.loading = true;
+            button.classList.add('loading');
+            
+            const section = button.dataset.section;
+            const postsHandling = JSON.parse(button.dataset.postsHandling);
+            
+            try {
+                console.log('Sending AJAX request...', {
+                    action: 'load_more_posts',
+                    nonce: tetazAjax.nonce,
+                    page: this.page + 1,
+                    section: section,
+                    posts_handling: postsHandling
+                });
+
+                const response = await fetch(tetazAjax.ajaxurl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        action: 'load_more_posts',
+                        nonce: tetazAjax.nonce,
+                        page: ++this.page,
+                        section: section,
+                        posts_handling: JSON.stringify(postsHandling)
+                    })
+                });
+
+                const data = await response.json();
+                console.log('Response received:', data);
+                
+                if (data.success) {
+                    this.handleSuccess(button, data);
+                } else {
+                    console.error('Error loading posts:', data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            } finally {
+                this.loading = false;
+                button.classList.remove('loading');
+            }
+        }
+
+        handleSuccess(button, data) {
+            const wrapper = button.closest('.fullscreen-posts-wrapper, .grid-split-posts-wrapper');
+            
+            if (wrapper) {
+                // Insert new posts before the display-more-wrapper
+                const displayMoreWrapper = wrapper.querySelector('.display-more-wrapper');
+                displayMoreWrapper.insertAdjacentHTML('beforebegin', data.data.html);
+
+                // Hide button if no more posts
+                if (data.data.has_more === false) {
+                    displayMoreWrapper.style.display = 'none';
+                }
+            }
+        }
+    }
+
+    // Related Posts Loader Class
+    class RelatedPostsLoader {
+        constructor() {
+            this.page = 1;
+            this.loading = false;
+            this.init();
+        }
+
+        init() {
+            document.addEventListener('click', (e) => {
+                const button = e.target.closest('.related-posts-section .load-more-button');
+                if (button) {
+                    e.preventDefault();
+                    this.handleLoadMore(button);
+                }
+            });
+        }
+
+        async handleLoadMore(button) {
+            if (this.loading) {
+                console.log('Already loading related posts...');
+                return;
+            }
+
+            console.log('Starting to load more posts, page:', this.page + 1);
+
+            this.loading = true;
+            button.classList.add('loading');
+            
+            const currentPostId = button.dataset.currentPostId;
+            
+            try {
+                const response = await fetch(tetazAjax.ajaxurl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        action: 'load_more_related_posts',
+                        nonce: tetazAjax.nonce,
+                        page: ++this.page,
+                        current_post_id: currentPostId
+                    })
+                });
+
+                const data = await response.json();
+                console.log('Response received:', data);
+                
+                if (data.success) {
+                    this.handleSuccess(button, data);
+                } else {
+                    console.error('Error loading related posts:', data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            } finally {
+                this.loading = false;
+                button.classList.remove('loading');
+            }
+        }
+
+        handleSuccess(button, data) {
+            const row = button.closest('.related-posts-section').querySelector('.related-posts-row');
+            
+            if (row) {
+                row.insertAdjacentHTML('beforeend', data.data.html);
+
+                // Hide button if no more posts
+                if (data.data.has_more === false) {
+                    button.closest('.load-more-wrapper').style.display = 'none';
+                }
+            }
+        }
+    }
+
+    // Initialize loaders only once
+    if (!window.postLoader) {
+        window.postLoader = new PostLoader();
+    }
+    if (!window.relatedPostsLoader) {
+        window.relatedPostsLoader = new RelatedPostsLoader();
+    }
 });

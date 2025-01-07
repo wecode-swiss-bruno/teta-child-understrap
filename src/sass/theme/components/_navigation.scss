@@ -1,0 +1,63 @@
+// Navigation styles
+.navbar {
+  padding: 1.5rem 2rem;
+  background-color: $white;
+  transition: all 0.3s ease;
+  height: 80px;
+
+  // Brand
+  .navbar-brand {
+    margin: 0;
+    padding: 0;
+    
+    img {
+      height: 40px;
+      width: auto;
+      transition: filter 0.3s ease;
+
+      @media (max-width: 768px) {
+        height: 30px;
+      }
+
+      &:hover {
+        filter: blur(4px);
+        transition: filter 3s ease;
+      }
+    }
+  }
+
+  // Menu Structure
+  .navbar-collapse {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    margin: 0 2rem;
+  }
+
+  // Menu Items
+  #left-menu,
+  #right-menu {
+    @include menu-base;
+  }
+
+  // States
+  &.scrolled-down {
+    transform: translateY(-100%);
+  }
+
+  &.scrolled-up {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+  }
+}
+
+// Off-Canvas Menu
+.offcanvas {
+  @include offcanvas-base;
+}
+
+// Prevent scroll when menu is open
+body.offcanvas-active {
+  @include prevent-scroll;
+} 
