@@ -2,6 +2,39 @@
 // To overwrite a Bootstrap variable you don´t have to touch the Bootstrap folder.
 // Just copy a variable from src/sass/assets/bootstrap5/_variables.scss, paste it here and edit the value.
 
+$primary: #46789e; // Once we've changed the value, we'll also make it the primary brand color.
+$secondary: #ff6b00;
+$primary-light: #e8f1f5;
+$secondary-light: #fff3e6;
+$primary-dark: #003366;
+$secondary-dark: #ff6b00;
+$primary-extra-light: #e8f1f5;
+$secondary-extra-light: #ff6b00;
+$white: #fff;
 
-$purple: #5533ff; // Thats a sample how you could change a BootStrap variable.
-$primary: $purple;  // Once we've changed the value, we'll also make it the primary brand color.
+$primary: $primary;
+$secondary: $secondary;
+// $success: $green !default;
+// $info: $cyan !default;
+// $warning: $yellow !default;
+// $danger: $red !default;
+// $light: $gray-100 !default;
+// $dark: $gray-900 !default;
+
+$spacer: 1rem !default;
+
+$btn-padding-y: 0.75rem !default;
+$btn-padding-x: 1.5rem !default;
+$btn-sm-padding-y: 0.5rem !default;
+$btn-sm-padding-x: 1rem !default;
+$btn-font-size: 1rem !default;
+$btn-line-height: 1.5 !default;
+$btn-border-radius: 999px !default;
+$btn-box-shadow: none !default;
+$btn-focus-box-shadow: none !default;
+$btn-color: $white !default;
+$btn-hover-color: $white !default;
+
+// FONTS
+$font-family-base: "Onest", sans-serif;
+$headings-font-family: "ABC Ginto Nord Unlicensed Trial", sans-serif;

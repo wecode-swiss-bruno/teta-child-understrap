@@ -1,4 +1,24 @@
-<p align="center"><img src="https://understrap.com/wp-content/uploads/2022/02/Understrap_Logo_Color.svg" width="320" height="auto"></p>
+# INSTALLATION
+
+Le theme parent "Understrap" doit être installé dans un dossier nommé "understrap" : "git clone https://github.com/understrap/understrap.git && composer install && npm install"
+
+Dans le theme enfant "my-physio-child", executer ces commandes:
+"composer install"
+"npm install"
+
+## DEVELOPPEMENT
+
+Lancer la commande "npm run watch" pour créer les fichiers JS et CSS à chaque modificiation de fichier
+
+## STYLES
+
+Modifier uniquement le fichier "/src/sass/theme/\_child_theme.scss" ou créer de nouveaux fichiers .scss et les inclures dans my-physio-us/src/sass/child-theme.scss
+
+# BUILD version compressée
+
+Commande: "npm run dist-clean && npm run dist-build"
+
+Cela va créer une version compressée du thème, utilisable en production
 
 #### See: [Official Demo](https://demos.understrap.com) | Read: [Official Docs Page](https://docs.understrap.com/)
 
@@ -18,7 +38,6 @@ Understrap is the renowned open-source WordPress starter theme that combines Und
 
 Full documentation for this starter theme is available at [docs.understrap.com](https://docs.understrap.com).
 
-
 ## Questions
 
 For support requests and bugs, we recommend browsing our issues [here (parent theme)](https://github.com/understrap/understrap/issues) and [here (child theme)](https://github.com/understrap/understrap-child/issues) and opening a new issue if necessary. For more broad discussion, like questions about the roadmap, visit our [discussion board](https://github.com/understrap/understrap/discussions).
@@ -27,7 +46,7 @@ For support requests and bugs, we recommend browsing our issues [here (parent th
 
 - Combines Underscore’s PHP/JS files and Bootstrap’s HTML/CSS/JS.
 - Comes with Bootstrap v5 Sass source files and additional .scss files. Nicely sorted and ready to add your own variables and customize the Bootstrap variables.
-- Uses sass and postCSS to handle compiling all of the styles into one style sheet. The theme also includes rollup.js to handle javascript compilation and minification. 
+- Uses sass and postCSS to handle compiling all of the styles into one style sheet. The theme also includes rollup.js to handle javascript compilation and minification.
 - Uses a single minified CSS file for all the basic stuff.
 - [Font Awesome](http://fortawesome.github.io/Font-Awesome/) integration (v4.7.0)
 - Jetpack ready
@@ -35,7 +54,7 @@ For support requests and bugs, we recommend browsing our issues [here (parent th
 - Contact Form 7 support
 - Translation ready
 
-## Understrap Academy 
+## Understrap Academy
 
 [Become an Understrap Expert.](https://www.understrapacademy.com) Presented by the team behind the Understrap Theme Framework, Understrap Academy is a collection of online courses that will help you speed up your development process, make your projects more profitable, and become an Understrap expert in record time.
 
@@ -53,6 +72,7 @@ Understrap is distributed under the terms of the GNU GPL version 2
 http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 
 ## Credits
+
 - Font Awesome: https://fontawesome.com/v4.7/license/ (Font: SIL OFL 1.1, (S)CSS: MIT)
 - Bootstrap: http://getbootstrap.com | https://github.com/twbs/bootstrap/blob/master/LICENSE (MIT)
 - WP Bootstrap Navwalker by Edward McIntyre & William Patton: https://github.com/wp-bootstrap/wp-bootstrap-navwalker (GNU GPLv3)

@@ -1,0 +1,163 @@
+/**
+Theme Name: MyPhysio
+Author: Wecode
+Author URI: https://wecode.swiss
+Description: Custom Wordpress Theme for MyPhysio Geneva.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: myphysio
+Template: astra
+*/
+
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  margin-top: 0 !important;
+}
+#wpadminbar {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+
+.bg-primary-dark {
+  background-color: $primary-dark !important;
+}
+
+.text-max-w {
+  max-width: 750px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.section-type-1 {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-color: var(--primary-light);
+}
+
+.section-type-2 {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.bg-secondary {
+  background-color: var(--secondary) !important;
+}
+
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-weight: 500 !important;
+}
+.h1,
+.h1 .elementor-heading-title {
+  font-size: 40px !important;
+  line-height: 1.2 !important;
+}
+
+.h2,
+.h2 .elementor-heading-title {
+  font-size: 32px !important;
+  line-height: 1.2 !important;
+}
+
+.h3,
+.h3 .elementor-heading-title {
+  font-size: 24px !important;
+  line-height: 1.2 !important;
+}
+
+.h4,
+.h4 .elementor-heading-title {
+  font-size: 20px !important;
+  line-height: 1.2 !important;
+}
+
+.h5,
+.h5 .elementor-heading-title {
+  font-size: 18px !important;
+  line-height: 1.2 !important;
+}
+
+.h6,
+.h6 .elementor-heading-title {
+  font-size: 16px !important;
+  line-height: 1.2 !important;
+}
+
+h1,
+.h1 {
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+h2,
+.h2 {
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+h3,
+.h3 {
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+h4,
+.h4 {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+h5,
+.h5 {
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+h6,
+.h6 {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+#main-nav {
+  .navbar-toggler {
+    border: 0px !important;
+  }
+  .navbar-nav {
+    .btn {
+      .nav-link {
+        padding: 0 !important;
+        display: inline-block !important;
+      }
+    }
+    a {
+      text-decoration: none !important;
+    }
+    .text-white {
+      a {
+        color: white !important;
+      }
+    }
+  }
+}

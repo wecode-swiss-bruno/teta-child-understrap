@@ -35,6 +35,7 @@ hr {
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
+  font-family: "ABC Ginto Nord Unlicensed Trial", sans-serif;
   font-weight: 500;
   line-height: 1.2;
 }
@@ -409,7 +410,7 @@ progress {
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
-  --bs-purple: #5533ff;
+  --bs-purple: #6f42c1;
   --bs-pink: #d63384;
   --bs-red: #dc3545;
   --bs-orange: #fd7e14;
@@ -430,16 +431,16 @@ progress {
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #5533ff;
-  --bs-secondary: #6c757d;
+  --bs-primary: #46789e;
+  --bs-secondary: #ff6b00;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 85, 51, 255;
-  --bs-secondary-rgb: 108, 117, 125;
+  --bs-primary-rgb: 70, 120, 158;
+  --bs-secondary-rgb: 255, 107, 0;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 255, 193, 7;
@@ -453,7 +454,7 @@ progress {
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-family: Onest, sans-serif;
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -469,8 +470,8 @@ progress {
   --bs-border-radius-xl: 1rem;
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
-  --bs-link-color: #5533ff;
-  --bs-link-hover-color: #4429cc;
+  --bs-link-color: #46789e;
+  --bs-link-hover-color: #38607e;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
 }
@@ -553,13 +554,13 @@ progress {
 
 .table-primary {
   --bs-table-color: #000;
-  --bs-table-bg: #ddd6ff;
-  --bs-table-border-color: #c7c1e6;
-  --bs-table-striped-bg: #d2cbf2;
+  --bs-table-bg: #dae4ec;
+  --bs-table-border-color: #c4cdd4;
+  --bs-table-striped-bg: #cfd9e0;
   --bs-table-striped-color: #000;
-  --bs-table-active-bg: #c7c1e6;
+  --bs-table-active-bg: #c4cdd4;
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: #ccc6ec;
+  --bs-table-hover-bg: #cad3da;
   --bs-table-hover-color: #000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
@@ -567,13 +568,13 @@ progress {
 
 .table-secondary {
   --bs-table-color: #000;
-  --bs-table-bg: #e2e3e5;
-  --bs-table-border-color: #cbccce;
-  --bs-table-striped-bg: #d7d8da;
+  --bs-table-bg: #ffe1cc;
+  --bs-table-border-color: #e6cbb8;
+  --bs-table-striped-bg: #f2d6c2;
   --bs-table-striped-color: #000;
-  --bs-table-active-bg: #cbccce;
+  --bs-table-active-bg: #e6cbb8;
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: #d1d2d4;
+  --bs-table-hover-bg: #ecd0bd;
   --bs-table-hover-color: #000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
@@ -849,7 +850,7 @@ progress {
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
-  --bs-purple: #5533ff;
+  --bs-purple: #6f42c1;
   --bs-pink: #d63384;
   --bs-red: #dc3545;
   --bs-orange: #fd7e14;
@@ -870,16 +871,16 @@ progress {
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #5533ff;
-  --bs-secondary: #6c757d;
+  --bs-primary: #46789e;
+  --bs-secondary: #ff6b00;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 85, 51, 255;
-  --bs-secondary-rgb: 108, 117, 125;
+  --bs-primary-rgb: 70, 120, 158;
+  --bs-secondary-rgb: 255, 107, 0;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 255, 193, 7;
@@ -893,7 +894,7 @@ progress {
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-family: Onest, sans-serif;
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -909,8 +910,8 @@ progress {
   --bs-border-radius-xl: 1rem;
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
-  --bs-link-color: #5533ff;
-  --bs-link-hover-color: #4429cc;
+  --bs-link-color: #46789e;
+  --bs-link-hover-color: #38607e;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
 }
@@ -923,12 +924,12 @@ progress {
 
 .text-bg-primary {
   color: #fff !important;
-  background-color: RGBA(85, 51, 255, var(--bs-bg-opacity, 1)) !important;
+  background-color: RGBA(70, 120, 158, var(--bs-bg-opacity, 1)) !important;
 }
 
 .text-bg-secondary {
-  color: #fff !important;
-  background-color: RGBA(108, 117, 125, var(--bs-bg-opacity, 1)) !important;
+  color: #000 !important;
+  background-color: RGBA(255, 107, 0, var(--bs-bg-opacity, 1)) !important;
 }
 
 .text-bg-success {
@@ -962,17 +963,17 @@ progress {
 }
 
 .link-primary {
-  color: #5533ff !important;
+  color: #46789e !important;
 }
 .link-primary:hover, .link-primary:focus {
-  color: #4429cc !important;
+  color: #38607e !important;
 }
 
 .link-secondary {
-  color: #6c757d !important;
+  color: #ff6b00 !important;
 }
 .link-secondary:hover, .link-secondary:focus {
-  color: #565e64 !important;
+  color: #ff8933 !important;
 }
 
 .link-success {
@@ -5121,16 +5122,16 @@ progress {
 
 .has-purple-color,
 .has-purple-color:visited {
-  color: #5533ff;
+  color: #6f42c1;
 }
 
 .has-purple-background-color {
-  background-color: #5533ff;
-  border-color: #5533ff;
+  background-color: #6f42c1;
+  border-color: #6f42c1;
 }
 
 .wp-block-button:hover .wp-block-button__link.has-white-background-color.has-purple-color {
-  color: #5533ff;
+  color: #6f42c1;
 }
 
 .has-pink-color,
@@ -5289,30 +5290,30 @@ progress {
 
 .has-primary-color,
 .has-primary-color:visited {
-  color: #5533ff;
+  color: #46789e;
 }
 
 .has-primary-background-color {
-  background-color: #5533ff;
-  border-color: #5533ff;
+  background-color: #46789e;
+  border-color: #46789e;
 }
 
 .wp-block-button:hover .wp-block-button__link.has-white-background-color.has-primary-color {
-  color: #5533ff;
+  color: #46789e;
 }
 
 .has-secondary-color,
 .has-secondary-color:visited {
-  color: #6c757d;
+  color: #ff6b00;
 }
 
 .has-secondary-background-color {
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #ff6b00;
+  border-color: #ff6b00;
 }
 
 .wp-block-button:hover .wp-block-button__link.has-white-background-color.has-secondary-color {
-  color: #6c757d;
+  color: #ff6b00;
 }
 
 .has-success-color,
@@ -5479,10 +5480,10 @@ body.understrap-no-sidebar .wp-block-cover.alignwide {
 }
 
 .wp-block-buttons .wp-block-button .wp-block-button__link {
-  --bs-btn-padding-y: 0.375rem;
-  --bs-btn-padding-x: 0.75rem;
+  --bs-btn-padding-y: 0.75rem;
+  --bs-btn-padding-x: 1.5rem;
   --bs-btn-font-size: 1rem;
-  --bs-btn-border-radius: 0.375rem;
+  --bs-btn-border-radius: 999px;
 }
 .wp-block-buttons .wp-block-button:not(.is-style-outline) .wp-block-button__link {
   border: 1px solid transparent;

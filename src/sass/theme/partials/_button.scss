@@ -1,0 +1,18 @@
+.btn {
+  border-radius: 999px !important;
+  font-weight: 500 !important;
+  color: $btn-color;
+  &:hover {
+    color: $btn-hover-color;
+  }
+  &.btn-sm {
+    padding: $btn-sm-padding-y $btn-sm-padding-x;
+  }
+  &.btn-outline-light {
+    &:hover {
+      //   border-color: $secondary;
+      background-color: rgba($white, 0.2);
+      //   color: $secondary;
+    }
+  }
+}

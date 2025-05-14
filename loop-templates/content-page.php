@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * Partial template for content in page.php
+ *
+ * @package Understrap
+ */
+
+// Exit if accessed directly.
+defined('ABSPATH') || exit;
+?>
+
+<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+
+	<?php
+	if (! is_page_template('page-templates/no-title.php')) {
+		the_title(
+			'<header class="entry-header"><h1 class="entry-title d-none">',
+			'</h1></header><!-- .entry-header -->'
+		);
+	}
+
+	echo get_the_post_thumbnail($post->ID, 'large');
+	?>
+
+	<div class="entry-content">
+
+		<?php
+		the_content();
+		$sections = get_field('page_builder');
+		if ($sections) :
+			foreach ($sections as $section) :
+
+				$template = str_replace('_', '-', $section['acf_fc_layout']);
+				get_template_part('flexible-content/sections/' . $template, '', $section);
+			endforeach;
+		endif;
+
+		understrap_link_pages();
+		?>
+
+	</div><!-- .entry-content -->
+
+	<footer class="entry-footer">
+
+		<?php understrap_edit_post_link(); ?>
+
+	</footer><!-- .entry-footer -->
+
+</article><!-- #post-<?php the_ID(); ?> -->
